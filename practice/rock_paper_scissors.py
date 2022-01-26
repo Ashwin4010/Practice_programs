@@ -47,7 +47,7 @@ while True:
         print("Jackass, select from the given options")
         exit()
 
-    computers_choice = random.randint(0,RPS_length -1)
+    computers_choice = random.randint(len(RPS_length))#computers_choice = random.randint(0,RPS_length -1)
 
     if computers_choice == 0:
         print(Rock)
