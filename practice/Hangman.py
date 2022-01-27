@@ -89,13 +89,17 @@ while not end_of_game:
         if letter == guess:
             display[position] = letter
 
-    lives_left -= 1
     print(display)
-    print(stages[lives_left-1])
+
+    if guess not in chosen_word:
+      lives_left -=1
+      print(stages[lives_left])
+      if lives_left == 0:
+        print("you Lost")
+        exit()
+
     if "_" not in display:
         end_of_game = True
         print("you have Won")
-    elif lives_left == 0:
-        print("you have lost")
-        print(stages[0])
         exit()
+ 
