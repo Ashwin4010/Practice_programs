@@ -1,4 +1,6 @@
 from art import logo
+import click
+
 print(logo)
 
 bids = {}
@@ -15,6 +17,10 @@ def find_highest_bidder(bidding_record):
       winner = bidder
   print(f"The winner is {winner} with a bid of ${highest_bid}")
 
+def clrscr():
+    click.clear()
+
+
 while not bidding_finished:
   name = input("What is your name?: ")
   price = int(input("What is your bid?: $"))
@@ -24,5 +30,4 @@ while not bidding_finished:
     bidding_finished = True
     find_highest_bidder(bids)
   elif should_continue == "yes":
-    clear()
-  
+      clrscr()
