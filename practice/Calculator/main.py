@@ -29,7 +29,7 @@ def calculate():
         print(operand)
     # variable is set to true it will trip once the user wishes to not continue
     should_continue = True
-
+    # while the variable is true it will loop 
     while should_continue:
         selected_operation = input("operation you want to perform : ")
         num2 = float(input("What's the second number: "))
