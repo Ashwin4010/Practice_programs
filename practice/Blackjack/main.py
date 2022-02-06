@@ -19,16 +19,63 @@ print(logo)
 
 play = input("Do you want to play/continue Blackjack? type Y or N: ").upper()
 
-J = K = Q = [10]
-A = [1,11]
-cards = [2,3,4,5,6,7,8,9,10]
+ace = [1,11]
+cards_without_ace = [2,3,4,5,6,7,8,9,10,10,10,10]
+cards = ace + cards_without_ace
 
-user_card =[]
-comp_card = []
+user_cards =[]
+comp_cards = []
+user_card_total = 0
+comp_card_total = 0
 
-if play == "Y":
-    generated_user_cards = random.sample((cards)+(A)+())
-    print(f"User's Card : {generated_user_cards}")
-    comp_card = ra
+def deal_card():
+    user_cards = random.sample(cards,2)
+    print(f"User's Card : {user_cards}")
+    comp_cards = random.sample(cards,2)
+    print(f"computer's card: {comp_cards}")
+
+def calcualte():
+    user_card_total = sum(user_cards)
+    print(user_card_total)
+    comp_card_total = sum(comp_cards)
+    print(comp_card_total)
+
+def compare(user,comp):
+    if user > comp:
+        print("User Wins !")
+    elif user == comp:
+        print("It's a Draw")
+    else:
+        print("Computer Wins")
 
 
+
+if user_card_total > 21 and user_cards == any(ace): 
+    if user_cards == any(ace):
+        ace_selection = input("You have Ace card. do you want it to be 1 or 11 ? : ")
+        for i in user_cards:
+            user_cards[i] = ace_selection
+        print(user_cards)
+elif user_card_total < 21 and user_cards == any(ace):
+    while user_card_total <21:
+        new_card = input("Pick another card ? : type 'y' or 'N' ").upper()
+        if new_card == "Y":
+            user_cards.append(random.sample(cards,1))
+            print(user_card_total)
+        elif user_card_total < 17:
+            comp_cards.append(random.sample(cards,1))
+            print(comp_card_total)
+    
+    if comp_card_total > 21:
+        print("User Wins !")
+    else:
+        compare(user=user_card_total,comp=comp_card_total)
+
+deal_card()
+compare(user=user_card_total,comp=comp_card_total)
+
+# else:
+#     print("end of the line")
+
+#compare(user=user_card_total,comp=comp_card_total)
+    
