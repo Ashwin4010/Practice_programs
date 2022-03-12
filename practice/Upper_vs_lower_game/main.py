@@ -1,58 +1,71 @@
-from random import sample
-from art import *
+# Display art
+from art import logo,vs
 from game_data import data
+import random 
+import os
 
-#todo 
-# 1. pick two random elements from data i.e a and b
+def format_data(account):
+    """format the account data into a printable format"""
+    account_name = account["name"]
+    account_descr =account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_descr}, from {account_country}"
+
+def check_answer(guess, a_followers, b_followers):
+    """Take the user guess and follower counts and returns if they guessed it correct"""
+    if a_followers > b_followers:
+        return guess == "a"
+    else:
+        return guess == "b"
 
 print(logo)
+# Generate a random account from the game data
 
-current_score = 0
-final_score = 0
-game_over = False
+score = 0
+game_should_continue = True
+account_b = random.choice(data)
 
-while not game_over:
-    
-    a = sample(data,1)
-    b = sample(data,1)
-    
-    name_of_a = a[0]['name']
-    follower_count_of_a = a[0]['follower_count']
-    description_of_a = a[0]['description']
-    country_of_a = a[0]['country']
 
-    name_of_b = b[0]['name']
-    follower_count_of_b = b[0]['follower_count']
-    description_of_b = b[0]['description']
-    country_of_b = b[0]['country']
+while game_should_continue:
 
-    def compare(follower_count_of_a,follower_count_of_b,user_choice):
-        """Function which compares a with b"""
-        if user_choice == "A" :
-            if follower_count_of_a > follower_count_of_b:
-                print(" Correct")
-                current_score += 1
-            else:
-                final_score = current_score
-                print(final_score)    
-                game_over = True
-        if user_choice == "B":
-            if follower_count_of_b > follower_count_of_a:
-                print(" Correct")
-                current_score += 1
-            else:
-                final_score = current_score
-                print(final_score)
-                game_over = True
-    print(f"Compare A: {name_of_a}, {description_of_a}, {country_of_a} ")
+    account_a = account_b
+    account_b = random.choice(data)
+    while account_a == account_b:
+        account_b = random.choice(data)
+
+    print(f"Compare A:{format_data(account_a)}")
     print(vs)
-    print(f"Compare B: {name_of_b}, {description_of_b}, {country_of_b} ")
+    print(f"Against B:{format_data(account_b)}")
+
+    # ask the user for a guess
+
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+
+    # check if the user is correct
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+
+    # get follower count of each account
+
+    is_correct = check_answer(guess,a_follower_count,b_follower_count)
     
-    user_choice = input("Who has more Followers ? A or B :").upper()
-    compare(follower_count_of_a,follower_count_of_b,user_choice)
-    game_over = True
-# 2. ask the user if the a is greater than b 
-# 3. if user predicts the right answer move the b to the postion of a
-# 4. pick another element from data and place it in the position of b(previous)
-# 5. perform step 2,3,4 until user is Wrong
-# 6. if the user is wrong then calculate the number of times they predicted correctly
+    os.system('cls')
+    print(logo)
+    # use if statement to check if the user is correct
+
+    if is_correct:
+        score += 1
+        print(f"You are Right !!!: your Score: {score}")
+    else:
+        print(f"You are Wrong. final Score: {score}")
+        game_should_continue = False
+
+    # give user feedback on their guess
+
+    # score keeping
+
+    # make the game repeatable
+
+    # making account at position the next account at position Abandon
+
+    # clear the screen between rounds
