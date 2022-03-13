@@ -59,13 +59,3 @@ while game_should_continue:
     else:
         print(f"You are Wrong. final Score: {score}")
         game_should_continue = False
-
-    # give user feedback on their guess
-
-    # score keeping
-
-    # make the game repeatable
-
-    # making account at position the next account at position Abandon
-
-    # clear the screen between rounds
