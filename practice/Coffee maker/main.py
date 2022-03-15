@@ -45,9 +45,9 @@ def process_coins():
     """ Returns the total calculated from thr conis inserted"""
     print("Insert the coins: ")
     total = int(input("How many Quartars? : ")) * 0.25
-    total += int(input("How many dimes? : ")) * 0.25
-    total += int(input("How many nickles? : ")) * 0.25
-    total += int(input("How many pennies? : ")) * 0.25  
+    total += int(input("How many dimes? : ")) * 0.10
+    total += int(input("How many nickles? : ")) * 0.05
+    total += int(input("How many pennies? : ")) * 0.01
     return total
 
 def is_transaction_successful(money_received, drink_cost):
