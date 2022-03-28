@@ -1,6 +1,6 @@
-with open("new_file.txt") as file:
+with open("/Users/Aravind/Desktop/new_file.txt") as file:
     contents = file.read()
     print(contents)
 
-with open("new_file.txt", mode="W") as file:
-    file.write("\nNew Text")
+with open("/Users/Aravind/Desktop/new_file.txt", mode="w") as file:
+    file.write("Hell")
