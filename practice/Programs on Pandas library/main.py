@@ -15,4 +15,14 @@
 import pandas
 
 data = pandas.read_csv("weather_data.csv")
-print(data["temp"])
+#print(type(data))
+print(type(data["temp"]))
+
+data_dict = data.to_dict()
+print(data_dict)
+
+temp_list = data['temp'].tolist()
+average = data['temp'].mean()
+print(average)
+maximum = data['temp'].max()
+print(maximum)
