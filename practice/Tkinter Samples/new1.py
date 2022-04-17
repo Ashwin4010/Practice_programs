@@ -17,7 +17,6 @@ def button_clicked():
     new_text = input.get()
     label.config(text=new_text)
 
-
 button = Button(text="Click Me",command=button_clicked)
 button.pack()
 
