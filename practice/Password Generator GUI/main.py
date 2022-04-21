@@ -33,16 +33,37 @@ def save(*args):
     if len(web) == 0 or len(pas) == 0:
         messagebox.showerror(title="Field Empty", message="Please don't leave any fields empty")
     else:
-        with open("data.json", mode="r") as file:
-            #Reading Old data
-            data = json.load(file)
+        try:
+            with open("data.json", mode="r") as file:
+                #Reading Old data
+                data = json.load(file)
+        except FileNotFoundError as filenotfound:
+            with open("data.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
             #updateing new data
             data.update(new_data)
-        with open("data.json",mode='w') as file:
-            #saving updated data
-            json.dump(data, file, indent=4)
+            with open("data.json",mode='w') as file:
+                #saving updated data
+                json.dump(data, file, indent=4)
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
+
+def find_password():
+    website = website_entry.get()
+    try:
+        with open("data.json") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showerror(title="error",message="No data file found")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website,message=f"Email: {email}\nPassword: {password}")
+        else:
+            messagebox.showerror(title="error",message=f"No details for {website} found")
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -66,12 +87,12 @@ password.grid(row=3, column=0)
 # entries
 
 website_entry = Entry(width=35)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
 email_entry = Entry(width=35)
-email_entry.grid(row=2, column=1, columnspan=2)
-password_entry = Entry(width=21)
-password_entry.grid(row=3, column=1)
+email_entry.grid(row=2, column=1)
+password_entry = Entry(width=35)
+password_entry.grid(row=3,column=1)
 
 # buttons
 
@@ -79,5 +100,7 @@ generate_password_button = Button(text="Generate Password",command=generate_pasw
 generate_password_button.grid(row=3, column=2)
 add_button = Button(text="Add", width=36, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
+search_button = Button(text="Search",width=10,command=find_password)
+search_button.grid(row=1,column=2)
 
 window.mainloop()
