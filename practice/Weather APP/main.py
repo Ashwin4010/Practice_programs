@@ -3,10 +3,11 @@ from twilio.rest import Client
 import os
 
 account_sid = "ACeac340b685febbef7b7cdce975c2f084"
-auth_token = "440a23bf48fb4e8b0c50dfb41ed512e8"
+auth_token = os.environ.get("AUTH_TOKEN")
 
 
-api_key = "4f1a19f7b657834ae6d26c58b3709d94"
+api_key = os.environ.get("OWM_API_KEY")
+print(api_key)
 OWM_Endpoint ="https://api.openweathermap.org/data/2.5/onecall?"
 
 PARAMETERS = {
